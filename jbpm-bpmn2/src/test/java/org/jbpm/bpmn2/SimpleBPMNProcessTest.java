@@ -2121,7 +2121,32 @@ public class SimpleBPMNProcessTest extends JbpmBpmn2TestCase {
 		ProcessInstance processInstance = ksession.startProcess("process",
 				params);
 	}
+	
 
+	public void testDataInputAssociationsWithStringObjectMVEL() throws Exception {
+		KnowledgeBase kbase = createKnowledgeBaseWithoutDumper("BPMN2-DataInputAssociations-string-object-mvel.bpmn2");
+		StatefulKnowledgeSession ksession = createKnowledgeSession(kbase);
+		ksession.getWorkItemManager().registerWorkItemHandler("Human Task",
+				new WorkItemHandler() {
+
+					public void abortWorkItem(WorkItem manager,
+							WorkItemManager mgr) {
+
+					}
+
+					public void executeWorkItem(WorkItem workItem,
+							WorkItemManager mgr) {
+						assertEquals("hello WORLD!!", workItem.getParameter("coId"));
+					}
+
+				});
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("instanceMetadata", "world!!");
+		ProcessInstance processInstance = ksession.startProcess("process",
+				params);
+	}
+
+	
 	public void testDataInputAssociationsWithStringObject() throws Exception {
 		KnowledgeBase kbase = createKnowledgeBaseWithoutDumper("BPMN2-DataInputAssociations-string-object.bpmn2");
 		StatefulKnowledgeSession ksession = createKnowledgeSession(kbase);

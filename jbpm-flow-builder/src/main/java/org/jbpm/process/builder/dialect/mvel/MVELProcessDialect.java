@@ -11,6 +11,7 @@ public class MVELProcessDialect implements ProcessDialect {
 
 	private static final ActionBuilder actionBuilder = new MVELActionBuilder();
 	private static final ReturnValueEvaluatorBuilder returnValueBuilder = new MVELReturnValueEvaluatorBuilder();
+	private static final AssignmentBuilder assignmentBuilder = new MVELAssignmentBuilder();
 	
 	public void addProcess(final ProcessBuildContext context) {
         // @TODO setup line mappings
@@ -29,8 +30,7 @@ public class MVELProcessDialect implements ProcessDialect {
 	}
 
 	public AssignmentBuilder getAssignmentBuilder() {
-		throw new UnsupportedOperationException(
-			"MVEL assignments not supported");
+		return assignmentBuilder;
 	}
 
 }

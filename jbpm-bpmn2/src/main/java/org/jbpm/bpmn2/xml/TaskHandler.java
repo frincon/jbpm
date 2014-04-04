@@ -16,6 +16,7 @@
 
 package org.jbpm.bpmn2.xml;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -116,17 +117,24 @@ public class TaskHandler extends AbstractNodeHandler {
 	    		}
 	    		Object result = null;
 	    		Object from = nl.item(0);
-	    		if (from instanceof Text) {
-	    		    String text = ((Text) from).getTextContent();
-	    		    if (text.startsWith("\"") && text.endsWith("\"")) {
-	                    result = text.substring(1, text.length() -1);
-	    		    } else {
-	    		        result = text;
-	    		    }
+				org.w3c.dom.Node languaje = subSubNode.getAttributes().getNamedItem("language");
+				if (languaje != null && languaje.getTextContent().equals("http://www.mvel.org/2.0")
+						&& from instanceof Text) {
+					workItemNode.addInAssociation(new DataAssociation((String) null, dataInputs.get(to), 
+							Arrays.asList(new Assignment("mvel", ((Text) from).getTextContent(), dataInputs.get(to))), null));
 				} else {
-				    result = nl.item(0);
+					if (from instanceof Text) {
+						String text = ((Text) from).getTextContent();
+						if (text.startsWith("\"") && text.endsWith("\"")) {
+							result = text.substring(1, text.length() -1);
+						} else {
+							result = text;
+						}
+					} else {
+						result = nl.item(0);
+					}
+	    			workItemNode.getWork().setParameter(dataInputs.get(to), result);
 				}
-	    		workItemNode.getWork().setParameter(dataInputs.get(to), result);
 			}
 		}
     }
