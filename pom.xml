@@ -22,7 +22,7 @@
   <!-- major.minor.micro.Final -->
   <!-- For example: 1.2.3 without the suffix ".Final" corrupts the OSGi eclipse updatesite -->
   <!-- For example: 1.2.3.M2 corrupts the OSGi eclipse updatesite update order -->
-  <version>5.5.0.Final</version>
+  <version>5.5.0.Final.frincon-mvel-expression-assignment</version>
 
   <name>jBPM multiproject</name>
   <description>jBPM: a Business Process Management (BPM) Suite</description>
@@ -46,6 +46,10 @@
     <maven.jdbc.password></maven.jdbc.password>
     <maven.jdbc.url>jdbc:h2:</maven.jdbc.url>
     <maven.jdbc.schema>public</maven.jdbc.schema>
+
+    <jbpm.version>5.5.0.Final.frincon-mvel-expression-assignment</jbpm.version>
+    <jbpm.osgi.version>5.5.0.Final</jbpm.osgi.version>
+
   </properties>
 
   <repositories>
@@ -80,14 +84,14 @@
     <module>jbpm-flow</module>
     <module>jbpm-flow-builder</module>
     <module>jbpm-persistence-jpa</module>
-    <module>jbpm-bam</module>
+<!--    <module>jbpm-bam</module> -->
     <module>jbpm-bpmn2</module>
     <module>jbpm-bpmn2-emfextmodel</module>
     <module>jbpm-workitems</module>
-    <module>jbpm-human-task</module>
-    <module>jbpm-gwt</module>
+<!--    <module>jbpm-human-task</module> -->
+<!--    <module>jbpm-gwt</module> -->
     <module>jbpm-test</module>
-    <module>jbpm-examples</module>
+<!--    <module>jbpm-examples</module> -->
   </modules>
 
   <dependencyManagement>
